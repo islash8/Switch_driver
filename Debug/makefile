@@ -32,6 +32,9 @@ endif
 LSS += \
 Switch_driver.lss \
 
+FLASH_IMAGE += \
+Switch_driver.hex \
+
 SIZEDUMMY += \
 sizedummy \
 
@@ -53,6 +56,12 @@ Switch_driver.lss: Switch_driver.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Switch_driver.hex: Switch_driver.elf
+	@echo 'Create Flash image (ihex format)'
+	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Switch_driver.elf  "Switch_driver.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 sizedummy: Switch_driver.elf
 	@echo 'Invoking: Print Size'
 	-avr-size --format=avr --mcu=atmega32 Switch_driver.elf
@@ -61,10 +70,10 @@ sizedummy: Switch_driver.elf
 
 # Other Targets
 clean:
-	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) Switch_driver.elf
+	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) Switch_driver.elf
 	-@echo ' '
 
-secondary-outputs: $(LSS) $(SIZEDUMMY)
+secondary-outputs: $(LSS) $(FLASH_IMAGE) $(SIZEDUMMY)
 
 .PHONY: all clean dependents
 

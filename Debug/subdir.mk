@@ -6,18 +6,21 @@
 C_SRCS += \
 ../DIO_Prog.c \
 ../Lib_Delay.c \
+../SSD_Prog.c \
 ../SWI_Prog.c \
 ../main.c 
 
 OBJS += \
 ./DIO_Prog.o \
 ./Lib_Delay.o \
+./SSD_Prog.o \
 ./SWI_Prog.o \
 ./main.o 
 
 C_DEPS += \
 ./DIO_Prog.d \
 ./Lib_Delay.d \
+./SSD_Prog.d \
 ./SWI_Prog.d \
 ./main.d 
 

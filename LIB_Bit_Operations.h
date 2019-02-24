@@ -110,7 +110,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  TOGGLE_BIT(variable, bit_number) \
-		 ((variable) ^ (LOOK_UP_TABLE(bit_number)))
+		 ((variable) ^ (LOOK_UP_TABLE(bit_number%NUMBER_OF_BITS)))
 
 /**************************************************************/
 /*  4. Assign bit operation:								    */
@@ -132,7 +132,7 @@ shiftedNumber[bit_number]
 #define  ASSIGN_BIT(variable, bit_number, value) \
 ((value) == 1) ? \
 ((variable) | (LOOK_UP_TABLE(bit_number))) \
-: ((variable) & ~(LOOK_UP_TABLE(bit_number)))
+: ((variable) & ~(LOOK_UP_TABLE(bit_number%NUMBER_OF_BITS)))
 
 /**************************************************************/
 /*  4. Get bit operation:									    */
@@ -150,7 +150,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  GET_BIT(variable, bit_number) \
-		 ((variable) & (LOOK_UP_TABLE(bit_number)))
+		 ((variable) & (LOOK_UP_TABLE(bit_number%NUMBER_OF_BITS)))
 
 /*===================Nibble operation Section=================*/
 
